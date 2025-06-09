@@ -22,7 +22,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            # O caminho do seu home.nix (crie esse arquivo se ainda não existir)
             home-manager.users.joaofelipe = import ./home.nix;
           }
         ];

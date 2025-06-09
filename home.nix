@@ -37,10 +37,10 @@
     plemoljp-nf
 
     # Ferramentas do sistema
-    bat         
-    eza          
-    fd           
-    ripgrep      
+    bat
+    eza
+    fd
+    ripgrep
     fzf
     zoxide
     jq
@@ -48,7 +48,7 @@
     p7zip
     poppler_utils
     imagemagick
-    resvg    
+    resvg
 
     lazygit
     yazi
@@ -84,6 +84,20 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
+
+  programs.ssh = {
+  enable = true;
+  addKeysToAgent = "yes";
+
+  matchBlocks = {
+    "github.com" = {
+      user = "git";
+      identityFile = "~/.ssh/id_ed25519";
+    };
+  };
+};
+
+services.ssh-agent.enable = true;
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
