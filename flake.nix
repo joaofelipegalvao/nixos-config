@@ -9,23 +9,20 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      joaofelipe = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ 
-          ./nixos/configuration.nix
-
-          # Integração do Home Manager ao NixOS
-          home-manager.nixosModules.home-manager
-         {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.joaofelipe = import ./home.nix;
-          }
-        ];
-      };
+  outputs = { nixpkgs, home-manager, ... }: {
+    nixosConfigurations.joaofelipe = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ 
+        ./nixos/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.joaofelipe = import ./home;
+          };
+        }
+      ];
     };
   };
 }
